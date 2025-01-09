@@ -1,0 +1,80 @@
+name: go
+description: "A new Flutter plugin project."
+publish_to: none
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.5.4
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  js: ^0.7.1
+  ffi: ^2.1.3
+  # 文件路径管理
+  path_provider: ^2.1.3
+  # 路径
+  path: ^1.9.0
+
+dev_dependencies:
+  ffigen: ^16.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The 'pluginClass' specifies the class (in Java, Kotlin, Swift, Objective-C, etc.)
+  # which should be registered in the plugin registry. This is required for
+  # using method channels.
+  # The Android 'package' specifies package in which the registered class is.
+  # This is required for using method channels on Android.
+  # The 'ffiPlugin' specifies that native code should be built and bundled.
+  # This is required for using `dart:ffi`.
+  # All these are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+  plugin:
+    platforms:
+      android:
+        ffiPlugin: true
+      ios:
+        ffiPlugin: true
+      linux:
+        ffiPlugin: true
+      macos:
+        ffiPlugin: true
+      windows:
+        ffiPlugin: true
+      web:
+#        pluginClass: WasmPlugin
+#        fileName: src/wasm_plugin.dart
+
+  assets:
+    - web/libgocoresdk.wasm
+    - web/plugin.js
+    - web/wasm_exec.js
+
+
+
+# flutter pub run ffigen
+ffigen:
+  output: './lib/src/bindings.dart'
+  headers:
+    entry-points:
+      - './android/src/main/jniLibs/arm64-v8a/libgocoresdk.h'
+  name: 'EngineLib'
+  preamble: |
+    // ignore_for_file: always_specify_types
+    // ignore_for_file: camel_case_types
+    // ignore_for_file: non_constant_identifier_names
+    // ignore_for_file: unused_field
+    // ignore_for_file: unused_element
+  comments:
+    style: any
+    length: full
+  description: 'golang 编写的库文件EngineLib'
