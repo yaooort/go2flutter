@@ -38,7 +38,7 @@
 克隆本项目到您的本地开发环境：
 
 ```shell
-git clone https://github.com/your_repo/go2flutter.git
+git clone https://github.com/yaooort/go2flutter.git
 cd go2flutter
 ```
 

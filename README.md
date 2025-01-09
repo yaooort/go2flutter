@@ -38,7 +38,7 @@ This project provides a complete framework demonstrating how to use Flutter's Da
 Clone the repository to your local development environment:
 
 ```shell
-git clone https://github.com/your_repo/go2flutter.git
+git clone https://github.com/yaooort/go2flutter.git
 cd go2flutter
 ```
 
