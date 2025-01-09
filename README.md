@@ -8,8 +8,8 @@ This project provides a complete framework demonstrating how to use Flutter's Da
 
 <div align="center">
 <p align="center">
-  <a href="../../README.md">English</a> · 
-  <a href="../../README_ZH.md">中文</a> · 
+  <a href="https://github.com/yaooort/go2flutter/blob/master/README.md">English</a> · 
+  <a href="https://github.com/yaooort/go2flutter/blob/master/README_ZH.md">中文</a>
 </p>
 </div>
 
