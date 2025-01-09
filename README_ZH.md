@@ -6,6 +6,13 @@
 
 ------
 
+<div align="center">
+<p align="center">
+  <a href="./README.md">English</a> · 
+  <a href="./README_ZH.md">中文</a> · 
+</p>
+</div>
+
 ## 功能简介
 
 - **跨平台支持**：支持 Android、iOS、Windows、macOS、Linux 和 Web 平台。

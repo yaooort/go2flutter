@@ -2,7 +2,16 @@
 
 This project provides a complete framework demonstrating how to use Flutter's Dart FFI (Foreign Function Interface) to call Golang code directly. It supports all Flutter platforms, including Android, iOS, Windows, macOS, Linux, and Web. With this framework, developers can bypass the need for platform-specific code (e.g., Java/Kotlin, Swift/Objective-C) and achieve seamless interaction between Dart and Golang.
 
+
+
 ------
+
+<div align="center">
+<p align="center">
+  <a href="../../README.md">English</a> · 
+  <a href="../../README_ZH.md">中文</a> · 
+</p>
+</div>
 
 ## Features
 
