@@ -6,7 +6,7 @@ IOS_OUT=../ios
 # 编译android 动态库,生成的H文件可不要
 ANDROID_OUT=../android/src/main/jniLibs/
 ANDROID_SDK=$(HOME)/Library/Android/sdk
-NDK_BIN=$(ANDROIDSDKROOT)/ndk/25.1.8937393/toolchains/llvm/prebuilt/darwin-x86_64/bin
+NDK_BIN=$(ANDROIDSDKROOT)/ndk/28.0.13004108/toolchains/llvm/prebuilt/darwin-x86_64/bin
 
 
 # 编译后名字

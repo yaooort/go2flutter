@@ -21,7 +21,7 @@ dependencies:
   path: ^1.9.0
 
 dev_dependencies:
-  ffigen: ^16.0.0
+  ffigen: ^17.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,6 +68,7 @@ ffigen:
     entry-points:
       - './android/src/main/jniLibs/arm64-v8a/libgocoresdk.h'
   name: 'EngineLib'
+  silence-enum-warning: true
   preamble: |
     // ignore_for_file: always_specify_types
     // ignore_for_file: camel_case_types
