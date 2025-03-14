@@ -217,8 +217,13 @@ web-wasm:
 	GOOS=js \
 	GOARCH=wasm \
 	go build -ldflags '-w' -trimpath -v -o $(WEB_OUT)/$(BUILD_LIB_NAME).wasm ./export/web
+	cp $(shell go env GOROOT)/misc/wasm/wasm_exec.js $(WEB_OUT)/wasm_exec.js
 
 web: web-wasm
 
+# 复制dart目录代码
+cp-dl:
+	cp -r $(shell flutter --version --machine | jq -r '.flutterRoot')/bin/cache/dart-sdk/include ./dart_api_dl/
+
 # 编译所有
-all: ios android windows linux macos web
+all: cp-dl ios android windows linux macos web

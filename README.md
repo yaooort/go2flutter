@@ -54,7 +54,12 @@ The Golang codebase is located in the `core` directory. Methods to be exposed to
 The framework provides a sample implementation (timer callback to return the current time). You can extend it as needed. After defining your methods, compile the Golang dynamic libraries for all platforms:
 
 ```shell
+# go mod version set current
+cd core
+make cp-dl
 make all
+cd ..
+flutter pub run ffigen
 ```
 
 The compiled libraries will be output to the `core/build` directory:

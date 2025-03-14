@@ -14,7 +14,7 @@
 	if (!globalThis.fs) {
 		let outputBuf = "";
 		globalThis.fs = {
-			constants: { O_WRONLY: -1, O_RDWR: -1, O_CREAT: -1, O_TRUNC: -1, O_APPEND: -1, O_EXCL: -1, O_DIRECTORY: -1 }, // unused
+			constants: { O_WRONLY: -1, O_RDWR: -1, O_CREAT: -1, O_TRUNC: -1, O_APPEND: -1, O_EXCL: -1 }, // unused
 			writeSync(fd, buf) {
 				outputBuf += decoder.decode(buf);
 				const nl = outputBuf.lastIndexOf("\n");
@@ -73,14 +73,6 @@
 		}
 	}
 
-	if (!globalThis.path) {
-		globalThis.path = {
-			resolve(...pathSegments) {
-				return pathSegments.join("/");
-			}
-		}
-	}
-
 	if (!globalThis.crypto) {
 		throw new Error("globalThis.crypto is not available, polyfill required (crypto.getRandomValues only)");
 	}
@@ -119,10 +111,6 @@
 			const setInt64 = (addr, v) => {
 				this.mem.setUint32(addr + 0, v, true);
 				this.mem.setUint32(addr + 4, Math.floor(v / 4294967296), true);
-			}
-
-			const setInt32 = (addr, v) => {
-				this.mem.setUint32(addr + 0, v, true);
 			}
 
 			const getInt64 = (addr) => {
@@ -216,18 +204,9 @@
 				return decoder.decode(new DataView(this._inst.exports.mem.buffer, saddr, len));
 			}
 
-			const testCallExport = (a, b) => {
-				this._inst.exports.testExport0();
-				return this._inst.exports.testExport(a, b);
-			}
-
 			const timeOrigin = Date.now() - performance.now();
 			this.importObject = {
-				_gotest: {
-					add: (a, b) => a + b,
-					callExport: testCallExport,
-				},
-				gojs: {
+				go: {
 					// Go's SP does not change as long as no Go code is running. Some operations (e.g. calls, getters and setters)
 					// may synchronously trigger a Go event handler. This makes Go code get executed in the middle of the imported
 					// function. A goroutine can switch to a new stack if the current stack is too small (see morestack function).
@@ -290,7 +269,7 @@
 									this._resume();
 								}
 							},
-							getInt64(sp + 8),
+							getInt64(sp + 8) + 1, // setTimeout has been seen to fire up to 1 millisecond early
 						));
 						this.mem.setInt32(sp + 16, id, true);
 					},

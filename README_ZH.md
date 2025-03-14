@@ -54,7 +54,12 @@ Golang 代码库位于 `core` 目录下，您需要将希望暴露给 Flutter �
 框架已提供一个示例代码（定时器回调当前时间），可参考扩展。完成方法定义后，运行以下命令编译所有平台的 Golang 动态库：
 
 ```shell
+# go mod version set current
+cd core
+make cp-dl
 make all
+cd ..
+flutter pub run ffigen
 ```
 
 编译完成后，生成的库文件位于 `core/build` 目录：
