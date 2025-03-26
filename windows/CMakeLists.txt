@@ -38,17 +38,10 @@ if(NOT EXISTS ${DLL_PATH})
     message(FATAL_ERROR "Target DLL not found: ${DLL_PATH}")
 endif()
 
-# 跨平台安装路径处理
-if(WIN32)
-    set(INSTALL_DEST "bin")  # Windows平台通常存放DLL在bin目录
-else()
-    set(INSTALL_DEST "lib")  # Unix-like平台通常存放库文件在lib目录
-endif()
-
 # 执行安装命令
 install(
         FILES ${DLL_PATH}
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/${INSTALL_DEST}"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/"
         PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
