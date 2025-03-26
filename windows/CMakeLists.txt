@@ -15,21 +15,43 @@ cmake_policy(VERSION 3.14...3.25)
 # This value is used when generating builds using this plugin, so it must
 # not be changed
 set(PLUGIN_NAME "go_plugin")
-
-
-# Automatically detect system architecture (x86_64, x86, ARM, etc.)
-# Automatically detect system architecture (x86_64, x86, ARM, etc.)
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-    set(ARCHITECTURE "x86_64")
-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "i386" OR CMAKE_SYSTEM_PROCESSOR MATCHES "x86")
+# Architecture Detection
+# ----------------------
+# 使用正则表达式统一匹配处理器架构（不区分大小写）
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|x86_64)$")
+    set(ARCHITECTURE "AMD64")
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(i.86|x86)$")
     set(ARCHITECTURE "x86")
-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "arm64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-    set(ARCHITECTURE "arm64")
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64|ARM64)$")
+    set(ARCHITECTURE "ARM64")
 else()
-    message(WARNING "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}")
-    set(ARCHITECTURE "unknown")
+    message(FATAL_ERROR "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
-# Use the detected architecture in your install path
-install(FILES ${PROJECT_SOURCE_DIR}/${ARCHITECTURE}/libgocoresdk.dll DESTINATION "${CMAKE_INSTALL_PREFIX}"
-        COMPONENT Runtime)
+# File Installation
+# -----------------
+# 定义动态库路径变量
+set(DLL_PATH "${PROJECT_SOURCE_DIR}/${ARCHITECTURE}/libgocoresdk.dll")
+
+# 安装前验证文件是否存在
+if(NOT EXISTS ${DLL_PATH})
+    message(FATAL_ERROR "Target DLL not found: ${DLL_PATH}")
+endif()
+
+# 跨平台安装路径处理
+if(WIN32)
+    set(INSTALL_DEST "bin")  # Windows平台通常存放DLL在bin目录
+else()
+    set(INSTALL_DEST "lib")  # Unix-like平台通常存放库文件在lib目录
+endif()
+
+# 执行安装命令
+install(
+        FILES ${DLL_PATH}
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/${INSTALL_DEST}"
+        PERMISSIONS
+        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE
+        COMPONENT Runtime
+)

@@ -156,7 +156,7 @@ windows-x86_64:
     GOARCH=amd64 \
     CC=x86_64-w64-mingw32-gcc \
     CXX=x86_64-w64-mingw32-g++ \
-    go build -buildmode=c-shared -ldflags '-w' -trimpath -v -o $(WINDOWS_OUT)/x86_64/$(BUILD_LIB_NAME).dll ./export/cgo/main.go
+    go build -buildmode=c-shared -ldflags '-w' -trimpath -v -o $(WINDOWS_OUT)/AMD64/$(BUILD_LIB_NAME).dll ./export/cgo/main.go
 
 windows-arm64:
 	CGO_ENABLED=1 \
@@ -164,7 +164,7 @@ windows-arm64:
     GOARCH=arm64 \
     CC=aarch64-w64-mingw32-gcc \
     CXX=aarch64-w64-mingw32-g++ \
-    go build -buildmode=c-shared -ldflags '-w' -trimpath -v -o $(WINDOWS_OUT)/arm64/$(BUILD_LIB_NAME).dll ./export/cgo/main.go
+    go build -buildmode=c-shared -ldflags '-w' -trimpath -v -o $(WINDOWS_OUT)/ARM64/$(BUILD_LIB_NAME).dll ./export/cgo/main.go
 
 windows: windows-x86 windows-x86_64
 
